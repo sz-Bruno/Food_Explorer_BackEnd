@@ -13,10 +13,10 @@ function AuthConfirm(request,response,next){
     const [,token]=authHeader.split(" ")
 
     try {
-       const {sub:dish_id}= verify(token, AuthConfig.jwt.secret)
+       const {sub:user_id}= verify(token, AuthConfig.jwt.secret)
 
        request.card={
-        id: Number(dish_id)
+        id: Number(user_id)
        }
        return next()
         

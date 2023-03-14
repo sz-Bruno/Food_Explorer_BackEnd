@@ -4,6 +4,7 @@ exports.up = knex=> knex.schema.createTable("Desserts",Table=>{
     Table.text('name')
     Table.text('description')
     Table.float('price')
+    Table.integer('qtd')
     Table.text('avatar')
 })
 
