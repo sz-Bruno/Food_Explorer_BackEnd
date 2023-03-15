@@ -9,8 +9,8 @@ class DrinkController{
         if(Drink.length===1){
             throw new AppError('Esta Bebida já está cadastrada!')
         }
-        await knex('Drinks').insert({name:name,description:description,price:price,qtd:qtd})
-        response.status(201).json({message:`Drink ${name} cadastrado com sucesso!`})
+        const Created_Drink=await knex('Drinks').insert({name:name,description:description,price:price,qtd:qtd})
+        response.status(201).json(Created_Drink[0])
     }
 
     async update(request,response){

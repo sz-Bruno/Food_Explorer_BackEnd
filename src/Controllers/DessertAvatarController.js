@@ -21,7 +21,7 @@ class DessertAvatarController{
        const UpdatedAvatar= await diskStorage.saveFile(fileAvatar)
 
        await knex('Desserts').update({avatar:UpdatedAvatar}).where({id:id})
-       response.json(Dessert)
+       response.json(Dessert[0])
     }
 }
 

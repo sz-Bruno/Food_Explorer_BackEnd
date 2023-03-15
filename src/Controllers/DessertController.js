@@ -9,8 +9,8 @@ class DessertController{
         if(Dessert.length===1){
             throw new AppError('Esta sobremesa já está cadastrada!')
         }
-        await knex('Desserts').insert({name:name,description:description,price:price,qtd:qtd})
-        response.status(201).json({message:`Sobremesa ${name} cadastrada com sucesso!`})
+        const Created_Dessert=await knex('Desserts').insert({name:name,description:description,price:price,qtd:qtd})
+        response.status(201).json(Created_Dessert[0])
     }
 
     async update(request,response){

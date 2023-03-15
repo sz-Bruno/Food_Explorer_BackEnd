@@ -20,8 +20,8 @@ class DrinkAvatarController{
 
          
 
-        const UpdatedDrink= await knex('Drinks').update({avatar:UpdatedAvatar}).where({id:id})
-        response.json({Drink})
+         await knex('Drinks').update({avatar:UpdatedAvatar}).where({id:id})
+        response.json(Drink[0])
 
 
     }

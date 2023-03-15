@@ -1,11 +1,14 @@
-const AppError = require("../Utils/AppError")
+const AppError= require('.././Utils/AppError')
 const knex= require('.././Database/knex/index')
 class PrincipalController{
     async create(request,response){
 
         const {name,description,price,qtd}= request.body
+        const Dish= await knex('Principal').where({name:name})
 
-      
+        if(Dish.length>0){
+            throw new AppError('Este prato já está cadastrado!')
+        }
 
        const CreatedDish=await knex('Principal').insert({name:name,description:description,price:price,qtd:qtd})
        response.status(201).json(CreatedDish[0])
