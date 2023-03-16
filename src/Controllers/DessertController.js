@@ -34,6 +34,10 @@ class DessertController{
         const Desserts= await knex.select("*").from ('Desserts')
         response.json(Desserts)
     }
+    async delete(request,response){
+        const{id}= request.params
+         await knex('Desserts').where({id:id}).del()
+    }
 }
 
 module.exports= DessertController

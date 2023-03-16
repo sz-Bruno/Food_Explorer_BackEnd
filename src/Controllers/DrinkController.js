@@ -27,12 +27,16 @@ class DrinkController{
         DrinkExists.price= price ?? DrinkExists.price
         DrinkExists.qtd= price ?? DrinkExists.qtd
 
-        await knex('Drinks').update({name,description,price,qtd}).where({id:id})
-        response.status(200).json({message:'Dados da bebida atualizados!'})
+        const UpdatedDrink=await knex('Drinks').update({name,description,price,qtd}).where({id:id})
+        response.status(200).json(UpdatedDrink[0])
     }
     async show(request,response){
         const Drinks= await knex.select("*").from ('Drinks')
         response.json(Drinks)
+    }
+    async delete(request,response){
+        const{id}= request.params
+         await knex('Drinks').where({id:id}).del()
     }
 }
 

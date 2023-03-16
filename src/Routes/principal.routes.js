@@ -14,6 +14,7 @@ const PrincipalRoutes= Router()
 PrincipalRoutes.get("/", principalController.show)
 PrincipalRoutes.post("/", principalController.create)
 PrincipalRoutes.put("/:id",principalController.update)
+PrincipalRoutes.delete("/:id",principalController.delete)
 PrincipalRoutes.patch("/:id",upload.single('avatar'),principalAvatarController.update)
 
 module.exports= PrincipalRoutes

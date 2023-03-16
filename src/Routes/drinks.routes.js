@@ -10,6 +10,7 @@ const upload= multer(UploadConfig.MULTER)
 
 DrinksRoutes.post('/',drinkController.create)
 DrinksRoutes.put('/:id',drinkController.update)
+DrinksRoutes.delete('/:id',drinkController.delete)
 DrinksRoutes.get('/',drinkController.show)
 DrinksRoutes.patch('/:id',upload.single('avatar'),drinkAvatarController.update)
 

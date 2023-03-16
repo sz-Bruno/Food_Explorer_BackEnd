@@ -29,12 +29,16 @@ class PrincipalController{
         Dish[0].price= price ?? Dish.price
         Dish[0].qtd= qtd ?? Dish.qtd
 
-        await knex('Principal').update({name,description,price,qtd}).where({id:id})
-        response.json({Dish})
+        const UpdatedDish=await knex('Principal').update({name,description,price,qtd}).where({id:id})
+        response.json(UpdatedDish[0])
     }
     async show(request,response){
         const dishs= await knex.select("*").from('Principal')
         response.json(dishs)
+    }
+    async delete(request,response){
+        const{id}= request.params
+         await knex('Principal').where({id:id}).del()
     }
 }
 

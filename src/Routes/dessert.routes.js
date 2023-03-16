@@ -10,6 +10,7 @@ const upload= multer(UploadConfig.MULTER)
 
 DessertRoutes.post('/',dessertController.create)
 DessertRoutes.put('/:id',dessertController.update)
+DessertRoutes.delete('/:id',dessertController.delete)
 DessertRoutes.get('/',dessertController.show)
 DessertRoutes.patch('/:id',upload.single('avatar'),dessertAvatarController.update)
 
