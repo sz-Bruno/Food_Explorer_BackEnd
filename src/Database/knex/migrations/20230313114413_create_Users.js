@@ -4,6 +4,7 @@ exports.up= knex=> knex.schema.createTable('Users',Table=>{
     Table.text('name')
     Table.text('email')
     Table.integer('password')
+    Table.boolean('Admin')
 })
   
 

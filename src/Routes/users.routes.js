@@ -3,8 +3,8 @@ const UsersRoutes= Router()
 const UsersController= require('.././Controllers/UsersController')
 const usersController= new UsersController()
 const AuthMiddleware= require('../Middlewares/AuthConfirm')
-
-UsersRoutes.post('/',usersController.create)
+const AdminMiddleware= require('../Middlewares/AuthAdmin')
+UsersRoutes.post('/',AdminMiddleware,usersController.create)
 UsersRoutes.put('/',AuthMiddleware,usersController.update)
 
 
