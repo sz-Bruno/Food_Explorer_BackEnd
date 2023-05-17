@@ -13,10 +13,10 @@ class DishController{
        const CreatedDish=await knex('Dishes').insert({title:title,description:description,price:price,qtd:qtd,category:category})
 
        const ingredient= ingredients.map(item=>{
-        return {
-            name:item,
-            dish_id: CreatedDish[0]
-        }
+            return {
+                name:item,
+                dish_id: CreatedDish[0]
+            }
        })
       await knex('Ingredients').insert(ingredient)
        response.status(201).json(
@@ -47,12 +47,12 @@ class DishController{
                 name:item,
                 dish_id: id
             }
-           })
-           await knex('Ingredients').where({dish_id:id}).del()
-           await knex('Ingredients').insert(ingredient).where({dish_id:id})
+        })
+        await knex('Ingredients').where({dish_id:id}).del()
+        await knex('Ingredients').insert(ingredient).where({dish_id:id})
         response.json(
             UpdatedDish[0]
-            )
+        )
     }
     async show(request,response){
         const {id}= request.params
@@ -72,8 +72,8 @@ class DishController{
         if(ingredients){
              const filtered_ingredient= ingredients.split(',').map(item=>item.trim())
 
-            dishs= await knex('Ingredients')
-            .select([
+             dishs= await knex('Ingredients')
+             .select([
                 "Dishes.id",
                 "Dishes.title",
                 "Dishes.description",
@@ -81,13 +81,12 @@ class DishController{
                 "Dishes.qtd",
                 "Dishes.avatar",
                 "Dishes.category"
-            ])
-            .whereLike('Dishes.title',`%${title}%`)
-            .whereIn('name',filtered_ingredient)
-            .innerJoin('Dishes',"Dishes.id","Ingredients.dish_id")
-            .groupBy("Dishes.id")
-            .orderBy('Dishes.title')
-           
+             ])
+             .whereLike('Dishes.title',`%${title}%`)
+             .whereIn('name',filtered_ingredient)
+             .innerJoin('Dishes',"Dishes.id","Ingredients.dish_id")
+             .groupBy("Dishes.id")
+             .orderBy('Dishes.title') 
         }else{
             dishs= await knex("Dishes")
             .whereLike("title", `%${title}%`)
@@ -95,8 +94,8 @@ class DishController{
             
         }
         const Ingredients = await knex("Ingredients") 
-         const DIshWithIngredient=dishs.map(dish =>{
-            const dishIngredient = Ingredients.filter(item => item.dish_id === dish.id)
+        const DIshWithIngredient=dishs.map(dish =>{
+         const dishIngredient = Ingredients.filter(item => item.dish_id === dish.id)
 
             return {
                 dish,
@@ -108,8 +107,8 @@ class DishController{
     }
     async delete(request,response){
         const{id}= request.params
-         await knex('Dishes').where({id:id}).del()
-         await knex('Ingredients').where({dish_id:id}).del()
+        await knex('Dishes').where({id:id}).del()
+        await knex('Ingredients').where({dish_id:id}).del()
     }
 }
 

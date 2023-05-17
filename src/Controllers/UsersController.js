@@ -7,8 +7,6 @@ class UsersController{
         const {name,email,password,Admin}= request.body
         const UserAlredyExists= await knex('Users').where({email:email})
     
-
-
         if(UserAlredyExists.length===1){
             throw new AppError('Este email já está cadastrado!')
         }
@@ -19,7 +17,6 @@ class UsersController{
 
     }
     async update(request,response){
-
         const {name,email,password,Admin}= request.body
         const user_id= request.card.id
         const User= await knex('Users').where({id:user_id})
